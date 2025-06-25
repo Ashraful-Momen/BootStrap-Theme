@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insurance Dashboard - User Profile</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --glass-bg: rgba(255, 255, 255, 0.1);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      
+
+      /* body {
+        background-image: url("https://plus.unsplash.com/premium_photo-1673618867217-a224b5c9bcf4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D");
+         background-image: url("https://images.unsplash.com/photo-1746637084176-1ad97bb732af?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); 
+         background-image: url("https://images.unsplash.com/photo-1746424919579-7c119aaa8e61?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); 
+         background-image: url("https://images.unsplash.com/photo-1476249202953-93ec0d185ab7?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); 
+         background-image: url("https://plus.unsplash.com/premium_photo-1666264200758-1c03db7f530c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); 
+         background-image: url("https://plus.unsplash.com/premium_photo-1663951812988-33d0120a8599?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+         background-image: url("https://images.unsplash.com/photo-1747277832101-bdba36d527b0?q=80&w=881&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");  
+      
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        backdrop-filter: blur(30px);
+      } */
+
+      body {
+        background: linear-gradient(
+          135deg,
+          #011468 0%,
+          #3b14a7 50%,
+          #fb93b2 100%
+        );
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* body {
+        background: linear-gradient(
+          140deg,
+          #000f53 0%,
+          #1e27a8 50%,
+          #0400d4 100%
+        );
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+      } */
+
+      .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        border-radius: 20px;
+      }
+
+      .glass-nav {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        border: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 15px 20px;
+      }
+
+      .profile-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        object-fit: cover;
+      }
+
+      .stat-card {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.15),
+          rgba(255, 255, 255, 0.05)
+        );
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        padding: 20px;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+
+      .insurance-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        font-size: 20px;
+      }
+
+      .life-insurance {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+      .motor-insurance {
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+      }
+      .cattle-insurance {
+        background: linear-gradient(135deg, #43e97b, #38f9d7);
+      }
+      .travel-insurance {
+        background: linear-gradient(135deg, #fa709a, #fee140);
+      }
+      .device-insurance {
+        background: linear-gradient(135deg, #a8edea, #fed6e3);
+      }
+      .health-card {
+        background: linear-gradient(135deg, #ff9a9e, #fecfef);
+      }
+      .telemedicine {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+
+      .policy-status {
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .status-active {
+        background: linear-gradient(135deg, #1dd1a1, #10ac84);
+        color: white;
+      }
+      .status-pending {
+        background: linear-gradient(135deg, #feca57, #ff9f43);
+        color: white;
+      }
+      .status-expired {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        color: white;
+      }
+
+      .quick-action-btn {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0.1)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        border-radius: 25px;
+        padding: 8px 20px;
+        transition: all 0.3s ease;
+        font-size: 14px;
+      }
+
+      .quick-action-btn:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.3),
+          rgba(255, 255, 255, 0.2)
+        );
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .table-glass {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        overflow: hidden;
+      }
+
+      .table-glass th {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: #2c3e50;
+        font-weight: 600;
+        padding: 15px;
+      }
+
+      .table-glass td {
+        border: none;
+        color: #2c3e50;
+        padding: 12px 15px;
+        font-weight: 500;
+      }
+
+      .table-glass tbody tr {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .table-glass tbody tr:hover {
+        background: rgba(0, 0, 0, 0.02);
+      }
+
+      .nav-pills .nav-link {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+        margin: 0 5px;
+        transition: all 0.3s ease;
+        padding: 10px 20px;
+      }
+
+      .nav-pills .nav-link.active {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0.1)
+        );
+        color: white;
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+
+      .text-glass {
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .text-glass-muted {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .btn-edit-profile {
+        background: linear-gradient(135deg, #667eea, #f093fb);
+        border: none;
+        border-radius: 20px;
+        color: white;
+        padding: 8px 20px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-edit-profile:hover {
+        background: linear-gradient(135deg, #f093fb, #667eea);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      /* Sidebar Styles */
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 70px;
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.2),
+          rgba(240, 147, 251, 0.2)
+        );
+        backdrop-filter: blur(20px);
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+        z-index: 1000;
+        padding: 15px 0;
+        overflow: visible;
+        transition: width 0.3s ease;
+      }
+
+      .sidebar.expanded {
+        width: 280px;
+      }
+
+      .sidebar-toggle {
+        position: absolute;
+        right: -15px;
+        top: 15px;
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(135deg, #667eea, #f093fb);
+        border: none;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1001;
+      }
+
+      .sidebar-toggle:hover {
+        transform: scale(1.1);
+      }
+
+      .sidebar-brand {
+        padding: 0 20px;
+        margin-bottom: 30px;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .sidebar-brand h4 {
+        color: white;
+        font-weight: 700;
+        margin: 0;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        font-size: 18px;
+      }
+
+      .sidebar.expanded .sidebar-brand h4 {
+        opacity: 1;
+      }
+
+      .sidebar-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .sidebar-nav-item {
+        margin-bottom: 3px;
+        position: relative;
+      }
+
+      .sidebar-nav-link {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border-radius: 0;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .sidebar-nav-link:hover,
+      .sidebar-nav-link.active {
+        color: white;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.05)
+        );
+      }
+
+      .sidebar.expanded .sidebar-nav-link:hover,
+      .sidebar.expanded .sidebar-nav-link.active {
+        transform: translateX(5px);
+      }
+
+      .sidebar-nav-link.active::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(135deg, #667eea, #f093fb);
+      }
+
+      .sidebar-nav-icon {
+        width: 20px;
+        margin-right: 15px;
+        text-align: center;
+        font-size: 16px;
+        min-width: 20px;
+      }
+
+      .sidebar-nav-text {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        white-space: nowrap;
+        flex: 1;
+        font-size: 14px;
+      }
+
+      .sidebar.expanded .sidebar-nav-text {
+        opacity: 1;
+      }
+
+      .dropdown-arrow {
+        margin-left: auto;
+        opacity: 0;
+        transition: all 0.3s ease;
+        font-size: 10px;
+      }
+
+      .sidebar.expanded .dropdown-arrow {
+        opacity: 1;
+      }
+
+      .dropdown-arrow.rotated {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-menu-custom {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        margin-top: 5px;
+        margin-left: 40px;
+        padding: 8px 0;
+        display: none;
+        min-width: 180px;
+      }
+
+      .sidebar.expanded .dropdown-menu-custom {
+        margin-left: 40px;
+      }
+
+      .dropdown-menu-custom.show {
+        display: block;
+        animation: slideDown 0.3s ease;
+      }
+
+      .dropdown-item-custom {
+        display: block;
+        padding: 6px 18px;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 13px;
+      }
+
+      .dropdown-item-custom:hover {
+        color: white;
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(5px);
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .main-content {
+        margin-left: 70px;
+        min-height: 100vh;
+        transition: margin-left 0.3s ease;
+      }
+
+      .main-content.expanded {
+        margin-left: 280px;
+      }
+
+      .content-wrapper {
+        padding: 0;
+      }
+
+      .dashboard-content {
+        padding: 20px;
+      }
+
+      /* Package card fixes */
+      .package-card {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.15),
+          rgba(255, 255, 255, 0.05)
+        );
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 20px;
+        height: 100%;
+        transition: transform 0.3s ease;
+      }
+
+      .package-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .package-list {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0;
+      }
+
+      .package-list li {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 5px;
+        padding-left: 10px;
+        position: relative;
+      }
+
+      .package-list li::before {
+        content: "•";
+        color: rgba(255, 255, 255, 0.5);
+        position: absolute;
+        left: 0;
+      }
+
+      /* Mobile Overlay */
+      .mobile-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      .mobile-overlay.show {
+        display: block;
+      }
+
+      /* Mobile Menu Button */
+      .mobile-menu-btn {
+        display: none;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(135deg, #667eea, #f093fb);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 18px;
+        z-index: 1002;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .mobile-menu-btn:hover {
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 768px) {
+        .mobile-menu-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .sidebar {
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+          width: 300px;
+          height: 100vh;
+          overflow-y: auto;
+          z-index: 1001;
+        }
+
+        .sidebar.show {
+          transform: translateX(0);
+        }
+
+        .sidebar.expanded {
+          width: 300px;
+        }
+
+        .sidebar-toggle {
+          display: none;
+        }
+
+        .sidebar-brand h4 {
+          opacity: 1;
+          font-size: 20px;
+        }
+
+        .sidebar-nav-text {
+          opacity: 1;
+          font-size: 15px;
+        }
+
+        .dropdown-arrow {
+          opacity: 1;
+        }
+
+        .sidebar-nav-link {
+          padding: 15px 20px;
+        }
+
+        .sidebar-nav-icon {
+          font-size: 18px;
+          margin-right: 15px;
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+
+        .main-content.expanded {
+          margin-left: 0;
+        }
+
+        .dashboard-content {
+          padding: 15px;
+          padding-top: 80px; /* Space for mobile menu button */
+        }
+
+        .glass-nav {
+          margin-top: 60px;
+          border-radius: 0;
+        }
+
+        /* Hide desktop navbar toggle */
+        .navbar-toggler {
+          display: none;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .dashboard-content {
+          padding: 10px;
+        }
+
+        .stat-card {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-chevron-right" id="toggleIcon"></i>
+      </button>
+
+      <div class="sidebar-brand">
+        <h4><i class="fas fa-shield-alt me-2"></i>Insurance</h4>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-item">
+          <a href="#" class="sidebar-nav-link active">
+            <i class="fas fa-tachometer-alt sidebar-nav-icon"></i>
+            <span class="sidebar-nav-text">Dashboard</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a
+            href="#"
+            class="sidebar-nav-link"
+            onclick="toggleDropdown(event, 'life-dropdown')"
+          >
+            <i class="fas fa-heart sidebar-nav-icon"></i>
+            <span class="sidebar-nav-text">Life Insurance</span>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-menu-custom" id="life-dropdown">
+            <a href="#" class="dropdown-item-custom">Package List</a>
+            <a href="#" class="dropdown-item-custom">Orders</a>
+            <a href="#" class="dropdown-item-custom">Policies</a>
+            <a href="#" class="dropdown-item-custom">Claims</a>
+            <a href="#" class="dropdown-item-custom">Documents</a>
+          </div>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a
+            href="#"
+            class="sidebar-nav-link"
+            onclick="toggleDropdown(event, 'motor-dropdown')"
+          >
+            <i class="fas fa-car sidebar-nav-icon"></i>
+            <span class="sidebar-nav-text">Motor Insurance</span>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-menu-custom" id="motor-dropdown">
+            <a href="#" class="dropdown-item-custom">Package List</a>
+            <a href="#" class="dropdown-item-custom">Car Insurance</a>
+            <a href="#" class="dropdown-item-custom">Bike Insurance</a>
+            <a href="#" class="dropdown-item-custom">Orders</a>
+            <a href="#" class="dropdown-item-custom">Policies</a>
+            <a href="#" class="dropdown-item-custom">Claims</a>
+          </div>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a
+            href="#"
+            class="sidebar-nav-link"
+            onclick="toggleDropdown(event, 'cattle-dropdown')"
+          >
+            <i class="fas fa-cow sidebar-nav-icon"></i>
+            <span class="sidebar-nav-text">Cattle Insurance</span>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-menu-custom" id="cattle-dropdown">
+            <a href="#" class="dropdown-item-custom">Package List</a>
+            <a href="#" class="dropdown-item-custom">Orders</a>
+            <a href="#" class="dropdown-item-custom">Policies</a>
+            <a href="#" class="dropdown-item-custom">Claims</a>
+            <a href="#" class="dropdown-item-custom">Livestock Registry</a>
+          </div>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a
+            href="#"
+            class="sidebar-nav-link"
+            onclick="toggleDropdown(event, 'travel-dropdown')"
+          >
+            <i class="fas fa-plane sidebar-nav-icon"></i>
+            <span class="sidebar-nav-text">Travel Insurance</span>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-menu-custom" id="travel-dropdown">
+            <a href="#" class="dropdown-item-custom">Package List</a>
+            <a href="#" class="dropdown-item-custom">Orders</a>
+            <a href="#" class="dropdown-item-custom">Policies</a>
+            <a href="#" class="dropdown-item-custom">Claims</a>
+            <a href="#" class="dropdown-item-custom">Travel History</a>
+          </div>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a
+            href="#"
+            class="sidebar-nav-link"
+            onclick="toggleDropdown(event, 'device-dropdown')"
+          >
+            <i class="fas fa-mobile-alt sidebar-nav-icon"></i>
+            <span class="sidebar-nav-text">Device Insurance</span>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-menu-custom" id="device-dropdown">
+            <a href="#" class="dropdown-item-custom">Package List</a>
+            <a href="#" class="dropdown-item-custom">Orders</a>
+            <a href="#" class="dropdown-item-custom">Policies</a>
+            <a href="#" class="dropdown-item-custom">Claims</a>
+            <a href="#" class="dropdown-item-custom">Device Registry</a>
+          </div>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a
+            href="#"
+            class="sidebar-nav-link"
+            onclick="toggleDropdown(event, 'health-dropdown')"
+          >
+            <i class="fas fa-medkit sidebar-nav-icon"></i>
+            <span class="sidebar-nav-text">Health Card</span>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-menu-custom" id="health-dropdown">
+            <a href="#" class="dropdown-item-custom">Package List</a>
+            <a href="#" class="dropdown-item-custom">Orders</a>
+            <a href="#" class="dropdown-item-custom">Active Cards</a>
+            <a href="#" class="dropdown-item-custom">Usage History</a>
+            <a href="#" class="dropdown-item-custom">Provider Network</a>
+          </div>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a
+            href="#"
+            class="sidebar-nav-link"
+            onclick="toggleDropdown(event, 'telemedicine-dropdown')"
+          >
+            <i class="fas fa-video sidebar-nav-icon"></i>
+            <span class="sidebar-nav-text">Telemedicine</span>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-menu-custom" id="telemedicine-dropdown">
+            <a href="#" class="dropdown-item-custom">Service Packages</a>
+            <a href="#" class="dropdown-item-custom">Appointments</a>
+            <a href="#" class="dropdown-item-custom">Consultations</a>
+            <a href="#" class="dropdown-item-custom">Medical History</a>
+            <a href="#" class="dropdown-item-custom">Doctors</a>
+          </div>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a href="#" class="sidebar-nav-link">
+            <i class="fas fa-credit-card sidebar-nav-icon"></i>
+            <span class="sidebar-nav-text">Billing</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a href="#" class="sidebar-nav-link">
+            <i class="fas fa-headset sidebar-nav-icon"></i>
+            <span class="sidebar-nav-text">Support</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a href="#" class="sidebar-nav-link">
+            <i class="fas fa-user-cog sidebar-nav-icon"></i>
+            <span class="sidebar-nav-text">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+      <!-- Top Navigation -->
+      <nav class="navbar navbar-expand-lg glass-nav d-none d-lg-block">
+        <div class="container-fluid">
+          <h4 class="text-glass">
+            <i class="fas fa-shield-alt me-2"></i>Instasure LTD.
+          </h4>
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link text-white" href="#"
+              ><i class="fas fa-bell"></i
+            ></a>
+            <a class="nav-link text-white" href="#"
+              ><i class="fas fa-envelope"></i
+            ></a>
+            <a class="nav-link text-white" href="#"
+              ><i class="fas fa-user-circle"></i
+            ></a>
+            <a class="nav-link text-white" href="#"
+              ><i class="fas fa-sign-out-alt"></i
+            ></a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="content-wrapper">
+        <div class="dashboard-content">
+          <div class="row">
+            <!-- Main Dashboard Content -->
+            <div class="col-lg-9">
+              <!-- Quick Stats -->
+              <div class="row mb-4">
+                <div class="col-lg-2 col-md-4 col-6 mb-3">
+                  <div class="stat-card text-center">
+                    <div class="insurance-icon life-insurance mx-auto">
+                      <i class="fas fa-heart text-white"></i>
+                    </div>
+                    <h6 class="text-white mb-1">Life Insurance</h6>
+                    <p class="text-glass-muted mb-0">2 Policies</p>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-3">
+                  <div class="stat-card text-center">
+                    <div class="insurance-icon motor-insurance mx-auto">
+                      <i class="fas fa-car text-white"></i>
+                    </div>
+                    <h6 class="text-white mb-1">Motor Insurance</h6>
+                    <p class="text-glass-muted mb-0">3 Policies</p>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-3">
+                  <div class="stat-card text-center">
+                    <div class="insurance-icon cattle-insurance mx-auto">
+                      <i class="fas fa-cow text-white"></i>
+                    </div>
+                    <h6 class="text-white mb-1">Cattle Insurance</h6>
+                    <p class="text-glass-muted mb-0">1 Policy</p>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-3">
+                  <div class="stat-card text-center">
+                    <div class="insurance-icon travel-insurance mx-auto">
+                      <i class="fas fa-plane text-white"></i>
+                    </div>
+                    <h6 class="text-white mb-1">Travel Insurance</h6>
+                    <p class="text-glass-muted mb-0">1 Policy</p>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-3">
+                  <div class="stat-card text-center">
+                    <div class="insurance-icon device-insurance mx-auto">
+                      <i class="fas fa-mobile-alt text-white"></i>
+                    </div>
+                    <h6 class="text-white mb-1">Device Insurance</h6>
+                    <p class="text-glass-muted mb-0">2 Policies</p>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-3">
+                  <div class="stat-card text-center">
+                    <div class="insurance-icon health-card mx-auto">
+                      <i class="fas fa-medkit text-white"></i>
+                    </div>
+                    <h6 class="text-white mb-1">Health Card</h6>
+                    <p class="text-glass-muted mb-0">Active</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Package Lists Section -->
+              <div class="row mb-4">
+                <div class="col-12">
+                  <div class="glass-card p-4">
+                    <h5 class="text-white mb-4">
+                      Available Insurance Packages
+                    </h5>
+                    <div class="row">
+                      <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="package-card">
+                          <div class="d-flex align-items-center mb-3">
+                            <div
+                              class="insurance-icon life-insurance me-3"
+                              style="width: 40px; height: 40px; font-size: 16px"
+                            >
+                              <i class="fas fa-heart text-white"></i>
+                            </div>
+                            <div>
+                              <h6 class="text-white mb-1">Life Insurance</h6>
+                              <small class="text-glass-muted"
+                                >Starting from $50/month</small
+                              >
+                            </div>
+                          </div>
+                          <ul class="package-list">
+                            <li>Basic Life Cover - $100K</li>
+                            <li>Premium Life Cover - $500K</li>
+                            <li>Family Life Cover - $1M</li>
+                          </ul>
+                          <button class="quick-action-btn btn-sm mt-2">
+                            View Packages
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="package-card">
+                          <div class="d-flex align-items-center mb-3">
+                            <div
+                              class="insurance-icon motor-insurance me-3"
+                              style="width: 40px; height: 40px; font-size: 16px"
+                            >
+                              <i class="fas fa-car text-white"></i>
+                            </div>
+                            <div>
+                              <h6 class="text-white mb-1">Motor Insurance</h6>
+                              <small class="text-glass-muted"
+                                >Starting from $30/month</small
+                              >
+                            </div>
+                          </div>
+                          <ul class="package-list">
+                            <li>Third Party Liability</li>
+                            <li>Comprehensive Coverage</li>
+                            <li>Premium Plus</li>
+                          </ul>
+                          <button class="quick-action-btn btn-sm mt-2">
+                            View Packages
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="package-card">
+                          <div class="d-flex align-items-center mb-3">
+                            <div
+                              class="insurance-icon travel-insurance me-3"
+                              style="width: 40px; height: 40px; font-size: 16px"
+                            >
+                              <i class="fas fa-plane text-white"></i>
+                            </div>
+                            <div>
+                              <h6 class="text-white mb-1">Travel Insurance</h6>
+                              <small class="text-glass-muted"
+                                >Starting from $15/trip</small
+                              >
+                            </div>
+                          </div>
+                          <ul class="package-list">
+                            <li>Domestic Travel</li>
+                            <li>International Travel</li>
+                            <li>Annual Multi-Trip</li>
+                          </ul>
+                          <button class="quick-action-btn btn-sm mt-2">
+                            View Packages
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="package-card">
+                          <div class="d-flex align-items-center mb-3">
+                            <div
+                              class="insurance-icon device-insurance me-3"
+                              style="width: 40px; height: 40px; font-size: 16px"
+                            >
+                              <i class="fas fa-mobile-alt text-white"></i>
+                            </div>
+                            <div>
+                              <h6 class="text-white mb-1">Device Insurance</h6>
+                              <small class="text-glass-muted"
+                                >Starting from $10/month</small
+                              >
+                            </div>
+                          </div>
+                          <ul class="package-list">
+                            <li>Mobile Phone Protection</li>
+                            <li>Laptop/Tablet Coverage</li>
+                            <li>Multi-Device Plan</li>
+                          </ul>
+                          <button class="quick-action-btn btn-sm mt-2">
+                            View Packages
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="package-card">
+                          <div class="d-flex align-items-center mb-3">
+                            <div
+                              class="insurance-icon cattle-insurance me-3"
+                              style="width: 40px; height: 40px; font-size: 16px"
+                            >
+                              <i class="fas fa-cow text-white"></i>
+                            </div>
+                            <div>
+                              <h6 class="text-white mb-1">Cattle Insurance</h6>
+                              <small class="text-glass-muted"
+                                >Starting from $25/head</small
+                              >
+                            </div>
+                          </div>
+                          <ul class="package-list">
+                            <li>Livestock Mortality</li>
+                            <li>Disease Coverage</li>
+                            <li>Weather Protection</li>
+                          </ul>
+                          <button class="quick-action-btn btn-sm mt-2">
+                            View Packages
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="package-card">
+                          <div class="d-flex align-items-center mb-3">
+                            <div
+                              class="insurance-icon health-card me-3"
+                              style="width: 40px; height: 40px; font-size: 16px"
+                            >
+                              <i class="fas fa-medkit text-white"></i>
+                            </div>
+                            <div>
+                              <h6 class="text-white mb-1">Health Discount</h6>
+                              <small class="text-glass-muted"
+                                >Starting from $20/month</small
+                              >
+                            </div>
+                          </div>
+                          <ul class="package-list">
+                            <li>Basic Health Card - 15% off</li>
+                            <li>Premium Health Card - 25% off</li>
+                            <li>Family Health Card - 30% off</li>
+                          </ul>
+                          <button class="quick-action-btn btn-sm mt-2">
+                            View Packages
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dashboard Content Tabs -->
+              <div class="glass-card d-lg-block d-none">
+                <!-- Navigation Tabs -->
+                <div class="p-4 pb-0">
+                  <ul class="nav nav-pills" id="dashboardTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button
+                        class="nav-link active"
+                        id="orders-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#orders"
+                        role="tab"
+                      >
+                        <i class="fas fa-shopping-cart me-2"></i>Orders
+                      </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button
+                        class="nav-link"
+                        id="policies-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#policies"
+                        role="tab"
+                      >
+                        <i class="fas fa-file-contract me-2"></i>Policies
+                      </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button
+                        class="nav-link"
+                        id="claims-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#claims"
+                        role="tab"
+                      >
+                        <i class="fas fa-clipboard-list me-2"></i>Claims
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content p-4">
+                  <!-- Orders Tab -->
+                  <div
+                    class="tab-pane fade show active"
+                    id="orders"
+                    role="tabpanel"
+                  >
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-3"
+                    >
+                      <h5 class="text-white mb-0">Recent Orders</h5>
+                      <button class="quick-action-btn">
+                        <i class="fas fa-plus me-2"></i>New Order
+                      </button>
+                    </div>
+
+                    <div class="table-responsive "  >
+                      <table class="table table-glass "  >
+                        <thead >
+                          <tr>
+                            <th>Order ID</th>
+                            <th>Insurance Type</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>#ORD-001</td>
+                            <td>Life Insurance</td>
+                            <td>$2,500</td>
+                            <td>2024-06-15</td>
+                            <td>
+                              <span class="policy-status status-active"
+                                >Completed</span
+                              >
+                            </td>
+                            <td>
+                              <button class="btn btn-sm quick-action-btn">
+                                View
+                              </button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>#ORD-002</td>
+                            <td>Motor Insurance</td>
+                            <td>$800</td>
+                            <td>2024-06-10</td>
+                            <td>
+                              <span class="policy-status status-pending"
+                                >Processing</span
+                              >
+                            </td>
+                            <td>
+                              <button class="btn btn-sm quick-action-btn">
+                                View
+                              </button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>#ORD-003</td>
+                            <td>Travel Insurance</td>
+                            <td>$150</td>
+                            <td>2024-06-08</td>
+                            <td>
+                              <span class="policy-status status-active"
+                                >Completed</span
+                              >
+                            </td>
+                            <td>
+                              <button class="btn btn-sm quick-action-btn">
+                                View
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <!-- Policies Tab -->
+                  <div class="tab-pane fade" id="policies" role="tabpanel">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-3"
+                    >
+                      <h5 class="text-white mb-0">Active Policies</h5>
+                      <button class="quick-action-btn">
+                        <i class="fas fa-download me-2"></i>Download All
+                      </button>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <div class="stat-card p-3">
+                          <div class="d-flex align-items-center mb-2">
+                            <div
+                              class="insurance-icon life-insurance me-3"
+                              style="width: 40px; height: 40px; font-size: 16px"
+                            >
+                              <i class="fas fa-heart text-white"></i>
+                            </div>
+                            <div>
+                              <h6 class="text-white mb-0">
+                                Life Insurance Premium
+                              </h6>
+                              <small class="text-glass-muted"
+                                >Policy #LI-2024-001</small
+                              >
+                            </div>
+                          </div>
+                          <div
+                            class="d-flex justify-content-between align-items-center"
+                          >
+                            <span class="policy-status status-active"
+                              >Active</span
+                            >
+                            <span class="text-white">$50,000</span>
+                          </div>
+                          <small class="text-glass-muted"
+                            >Expires: 2025-12-31</small
+                          >
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                        <div class="stat-card p-3">
+                          <div class="d-flex align-items-center mb-2">
+                            <div
+                              class="insurance-icon motor-insurance me-3"
+                              style="width: 40px; height: 40px; font-size: 16px"
+                            >
+                              <i class="fas fa-car text-white"></i>
+                            </div>
+                            <div>
+                              <h6 class="text-white mb-0">Car Insurance</h6>
+                              <small class="text-glass-muted"
+                                >Policy #MI-2024-002</small
+                              >
+                            </div>
+                          </div>
+                          <div
+                            class="d-flex justify-content-between align-items-center"
+                          >
+                            <span class="policy-status status-active"
+                              >Active</span
+                            >
+                            <span class="text-white">$15,000</span>
+                          </div>
+                          <small class="text-glass-muted"
+                            >Expires: 2025-06-20</small
+                          >
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                        <div class="stat-card p-3">
+                          <div class="d-flex align-items-center mb-2">
+                            <div
+                              class="insurance-icon cattle-insurance me-3"
+                              style="width: 40px; height: 40px; font-size: 16px"
+                            >
+                              <i class="fas fa-cow text-white"></i>
+                            </div>
+                            <div>
+                              <h6 class="text-white mb-0">Cattle Insurance</h6>
+                              <small class="text-glass-muted"
+                                >Policy #CI-2024-003</small
+                              >
+                            </div>
+                          </div>
+                          <div
+                            class="d-flex justify-content-between align-items-center"
+                          >
+                            <span class="policy-status status-pending"
+                              >Renewal Due</span
+                            >
+                            <span class="text-white">$5,000</span>
+                          </div>
+                          <small class="text-glass-muted"
+                            >Expires: 2024-07-15</small
+                          >
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                        <div class="stat-card p-3">
+                          <div class="d-flex align-items-center mb-2">
+                            <div
+                              class="insurance-icon health-card me-3"
+                              style="width: 40px; height: 40px; font-size: 16px"
+                            >
+                              <i class="fas fa-medkit text-white"></i>
+                            </div>
+                            <div>
+                              <h6 class="text-white mb-0">
+                                Health Discount Card
+                              </h6>
+                              <small class="text-glass-muted"
+                                >Card #HD-2024-004</small
+                              >
+                            </div>
+                          </div>
+                          <div
+                            class="d-flex justify-content-between align-items-center"
+                          >
+                            <span class="policy-status status-active"
+                              >Active</span
+                            >
+                            <span class="text-white">20% Discount</span>
+                          </div>
+                          <small class="text-glass-muted"
+                            >Valid until: 2025-12-31</small
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Claims Tab -->
+                  <div class="tab-pane fade" id="claims" role="tabpanel">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-3"
+                    >
+                      <h5 class="text-white mb-0">Claims History</h5>
+                      <button class="quick-action-btn">
+                        <i class="fas fa-plus me-2"></i>New Claim
+                      </button>
+                    </div>
+
+                    <div class="table-responsive">
+                      <table class="table table-glass">
+                        <thead>
+                          <tr>
+                            <th>Claim ID</th>
+                            <th>Policy</th>
+                            <th>Amount Claimed</th>
+                            <th>Date Filed</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>#CLM-001</td>
+                            <td>Motor Insurance</td>
+                            <td>$3,200</td>
+                            <td>2024-06-01</td>
+                            <td>
+                              <span class="policy-status status-active"
+                                >Approved</span
+                              >
+                            </td>
+                            <td>
+                              <button class="btn btn-sm quick-action-btn">
+                                Details
+                              </button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>#CLM-002</td>
+                            <td>Device Insurance</td>
+                            <td>$450</td>
+                            <td>2024-05-28</td>
+                            <td>
+                              <span class="policy-status status-pending"
+                                >Under Review</span
+                              >
+                            </td>
+                            <td>
+                              <button class="btn btn-sm quick-action-btn">
+                                Details
+                              </button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>#CLM-003</td>
+                            <td>Travel Insurance</td>
+                            <td>$120</td>
+                            <td>2024-05-15</td>
+                            <td>
+                              <span class="policy-status status-expired"
+                                >Rejected</span
+                              >
+                            </td>
+                            <td>
+                              <button class="btn btn-sm quick-action-btn">
+                                Details
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Section : 3rd Version  -->
+            <div class="col-lg-3 mb-4">
+              <div
+                class="glass-card p-4 text-center rounded-4 shadow-lg position-relative border border-light border-opacity-25"
+              >
+                <!-- Profile Avatar with Status Badge -->
+                <div class="position-relative d-inline-block mb-3">
+                  <img
+                    src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-female-user-profile-vector-illustration-isolated-background-women-profile-sign-business-concept_157943-38866.jpg?semt=ais_hybrid&w=740"
+                    alt="Profile"
+                    class="profile-avatar rounded-circle border border-light border-3 shadow"
+                    style="width: 100px; height: 100px; object-fit: cover"
+                  />
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success border border-light border-2"
+                  >
+                    <i class="fas fa-check-circle"></i>
+                  </span>
+                </div>
+
+                <!-- Profile Header -->
+                <h4 class="text-white mb-2 fw-bold">Janny Doe</h4>
+                <div class="mb-2">
+                  <span
+                    class="badge bg-gradient bg-primary px-3 py-2 rounded-pill shadow-sm"
+                  >
+                    <i class="fas fa-crown text-warning me-1"></i>Premium Member
+                  </span>
+                </div>
+                <p class="text-white-50 mb-4">
+                  <small
+                    >Member ID:
+                    <strong class="text-info">#A105893</strong></small
+                  >
+                </p>
+
+                <!-- Contact Information with Colored Icons -->
+                <div class="mb-4">
+                  <div
+                    class="d-flex align-items-center justify-content-start mb-2"
+                  >
+                    <div
+                      class="bg-primary bg-opacity-75 rounded-circle p-2 me-3 shadow-sm"
+                      style="width: 35px; height: 35px"
+                    >
+                      <i
+                        class="fas fa-phone-alt text-white"
+                        style="font-size: 14px"
+                      ></i>
+                    </div>
+                    <span class="text-light">01859385787</span>
+                  </div>
+                  <div
+                    class="d-flex align-items-center justify-content-start mb-2"
+                  >
+                    <div
+                      class="bg-danger bg-opacity-75 rounded-circle p-2 me-3 shadow-sm"
+                      style="width: 35px; height: 35px"
+                    >
+                      <i
+                        class="fas fa-envelope text-white"
+                        style="font-size: 14px"
+                      ></i>
+                    </div>
+                    <span class="text-light">ashraful@instasure.xyz</span>
+                  </div>
+                  <div
+                    class="d-flex align-items-center justify-content-start mb-2"
+                  >
+                    <div
+                      class="bg-success bg-opacity-75 rounded-circle p-2 me-3 shadow-sm"
+                      style="width: 35px; height: 35px"
+                    >
+                      <i
+                        class="fas fa-map-marker-alt text-white"
+                        style="font-size: 14px"
+                      ></i>
+                    </div>
+                    <span class="text-light">Banani, Dhaka</span>
+                  </div>
+                </div>
+
+                <!-- Additional Information with Colored Icons -->
+                <!-- <div class="mb-4">
+                  <div
+                    class="d-flex align-items-center justify-content-start mb-2"
+                  >
+                    <div
+                      class="bg-warning bg-opacity-75 rounded-circle p-2 me-3 shadow-sm"
+                      style="width: 35px; height: 35px"
+                    >
+                      <i
+                        class="fas fa-birthday-cake text-white"
+                        style="font-size: 14px"
+                      ></i>
+                    </div>
+                    <span class="text-light">Born: Feb 14, 1992</span>
+                  </div>
+                  <div
+                    class="d-flex align-items-center justify-content-start mb-2"
+                  >
+                    <div
+                      class="bg-info bg-opacity-75 rounded-circle p-2 me-3 shadow-sm"
+                      style="width: 35px; height: 35px"
+                    >
+                      <i
+                        class="fas fa-calendar-alt text-white"
+                        style="font-size: 14px"
+                      ></i>
+                    </div>
+                    <span class="text-light">Joined: Jan 10, 2021</span>
+                  </div>
+                </div> -->
+
+                <!-- Action Buttons -->
+                <div class="mb-4">
+                  <button
+                    class="btn btn-outline-light btn-sm px-4 rounded-pill me-2 shadow-sm"
+                  >
+                    <i class="fas fa-edit me-2 text-primary"></i>Edit Profile
+                  </button>
+                  <button
+                    class="btn btn-outline-success btn-sm px-4 rounded-pill shadow-sm"
+                  >
+                    <i class="fas fa-share-alt me-2 text-success"></i>Share
+                  </button>
+                </div>
+
+                <!-- Divider -->
+                <hr class="my-4 border-light border-opacity-25" />
+
+                <!-- Statistics Section -->
+                <div class="row text-center g-3">
+                  <div class="col-4">
+                    <div class="bg-light bg-opacity-10 rounded-3 p-3 shadow-sm">
+                      <div
+                        class="bg-primary bg-opacity-75 rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                        style="width: 40px; height: 40px"
+                      >
+                        <i class="fas fa-file-contract text-white"></i>
+                      </div>
+                      <h6 class="text-white mb-1 fw-bold">12</h6>
+                      <small class="text-white-50">Policies</small>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="bg-light bg-opacity-10 rounded-3 p-3 shadow-sm">
+                      <div
+                        class="bg-warning bg-opacity-75 rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                        style="width: 40px; height: 40px"
+                      >
+                        <i class="fas fa-clipboard-list text-white"></i>
+                      </div>
+                      <h6 class="text-white mb-1 fw-bold">3</h6>
+                      <small class="text-white-50">Claims</small>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="bg-light bg-opacity-10 rounded-3 p-3 shadow-sm">
+                      <div
+                        class="bg-success bg-opacity-75 rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                        style="width: 40px; height: 40px"
+                      >
+                        <i class="fas fa-check-circle text-white"></i>
+                      </div>
+                      <h6 class="text-white mb-1 fw-bold">8</h6>
+                      <small class="text-white-50">Active</small>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Social Media Links -->
+                <div class="mt-4">
+                  <div class="d-flex justify-content-center gap-2">
+                    <a
+                      href="#"
+                      class="btn btn-sm rounded-circle shadow-sm"
+                      style="
+                        width: 40px;
+                        height: 40px;
+                        background-color: #3b5998;
+                      "
+                    >
+                      <i class="fab fa-facebook-f text-white"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="btn btn-sm rounded-circle shadow-sm"
+                      style="
+                        width: 40px;
+                        height: 40px;
+                        background-color: #1da1f2;
+                      "
+                    >
+                      <i class="fab fa-twitter text-white"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="btn btn-sm rounded-circle shadow-sm"
+                      style="
+                        width: 40px;
+                        height: 40px;
+                        background-color: #0077b5;
+                      "
+                    >
+                      <i class="fab fa-linkedin-in text-white"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Section : 2nd Version  -->
+            <!-- <div class="col-lg-3 mb-4">
+              <div
+                class="glass-card p-4 text-center rounded-4 shadow-lg position-relative border border-light border-opacity-25"
+              >
+             
+                <div class="position-relative d-inline-block mb-3">
+                  <img
+                    src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-female-user-profile-vector-illustration-isolated-background-women-profile-sign-business-concept_157943-38866.jpg?semt=ais_hybrid&w=740"
+                    alt="Profile"
+                    class="profile-avatar rounded-circle border border-light border-3 shadow"
+                    style="width: 100px; height: 100px; object-fit: cover"
+                  />
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success border border-light border-2"
+                  >
+                    <i class="fas fa-check-circle"></i>
+                  </span>
+                </div>
+
+               
+                <h4 class="text-white mb-2 fw-bold">Janny Doe</h4>
+                <div class="mb-2">
+                  <span
+                    class="badge bg-gradient bg-primary px-3 py-2 rounded-pill shadow-sm"
+                  >
+                    <i class="fas fa-crown text-warning me-1"></i>Premium Member
+                  </span>
+                </div>
+                <p class="text-white-50 mb-4">
+                  <small
+                    >Member ID:
+                    <strong class="text-info">#A105893</strong></small
+                  >
+                </p>
+
+                <div class="mb-4 ">
+                  <div
+                    class="d-flex align-items-center justify-content-center mb-2"
+                  >
+                    <div
+                      class="bg-primary bg-opacity-75 rounded-circle p-2 me-3 shadow-sm"
+                      style="width: 35px; height: 35px"
+                    >
+                      <i
+                        class="fas fa-phone-alt text-white"
+                        style="font-size: 14px"
+                      ></i>
+                    </div>
+                    <span class="text-light">01859385787</span>
+                  </div>
+                  <div
+                    class="d-flex align-items-center justify-content-center mb-2"
+                  >
+                    <div
+                      class="bg-danger bg-opacity-75 rounded-circle p-2 me-3 shadow-sm"
+                      style="width: 35px; height: 35px"
+                    >
+                      <i
+                        class="fas fa-envelope text-white"
+                        style="font-size: 14px"
+                      ></i>
+                    </div>
+                    <span class="text-light">ashraful@instasure.xyz</span>
+                  </div>
+                  <div
+                    class="d-flex align-items-center justify-content-center mb-2"
+                  >
+                    <div
+                      class="bg-success bg-opacity-75 rounded-circle p-2 me-3 shadow-sm"
+                      style="width: 35px; height: 35px"
+                    >
+                      <i
+                        class="fas fa-map-marker-alt text-white"
+                        style="font-size: 14px"
+                      ></i>
+                    </div>
+                    <span class="text-light">Banani, Dhaka</span>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <div
+                    class="d-flex align-items-center justify-content-center mb-2"
+                  >
+                    <div
+                      class="bg-warning bg-opacity-75 rounded-circle p-2 me-3 shadow-sm"
+                      style="width: 35px; height: 35px"
+                    >
+                      <i
+                        class="fas fa-birthday-cake text-white"
+                        style="font-size: 14px"
+                      ></i>
+                    </div>
+                    <span class="text-light">Born: Feb 14, 1992</span>
+                  </div>
+                  <div
+                    class="d-flex align-items-center justify-content-center mb-2"
+                  >
+                    <div
+                      class="bg-info bg-opacity-75 rounded-circle p-2 me-3 shadow-sm"
+                      style="width: 35px; height: 35px"
+                    >
+                      <i
+                        class="fas fa-calendar-alt text-white"
+                        style="font-size: 14px"
+                      ></i>
+                    </div>
+                    <span class="text-light">Joined: Jan 10, 2021</span>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <button
+                    class="btn btn-outline-light btn-sm px-4 rounded-pill me-2 shadow-sm"
+                  >
+                    <i class="fas fa-edit me-2 text-primary"></i>Edit Profile
+                  </button>
+                  <button
+                    class="btn btn-outline-success btn-sm px-4 rounded-pill shadow-sm"
+                  >
+                    <i class="fas fa-share-alt me-2 text-success"></i>Share
+                  </button>
+                </div>
+
+                <hr class="my-4 border-light border-opacity-25" />
+
+                <div class="row text-center g-3">
+                  <div class="col-4">
+                    <div class="bg-light bg-opacity-10 rounded-3 p-3 shadow-sm">
+                      <div
+                        class="bg-primary bg-opacity-75 rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                        style="width: 40px; height: 40px"
+                      >
+                        <i class="fas fa-file-contract text-white"></i>
+                      </div>
+                      <h6 class="text-white mb-1 fw-bold">12</h6>
+                      <small class="text-white-50">Policies</small>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="bg-light bg-opacity-10 rounded-3 p-3 shadow-sm">
+                      <div
+                        class="bg-warning bg-opacity-75 rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                        style="width: 40px; height: 40px"
+                      >
+                        <i class="fas fa-clipboard-list text-white"></i>
+                      </div>
+                      <h6 class="text-white mb-1 fw-bold">3</h6>
+                      <small class="text-white-50">Claims</small>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="bg-light bg-opacity-10 rounded-3 p-3 shadow-sm">
+                      <div
+                        class="bg-success bg-opacity-75 rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center"
+                        style="width: 40px; height: 40px"
+                      >
+                        <i class="fas fa-check-circle text-white"></i>
+                      </div>
+                      <h6 class="text-white mb-1 fw-bold">8</h6>
+                      <small class="text-white-50">Active</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4">
+                  <div class="d-flex justify-content-center gap-2">
+                    <a
+                      href="#"
+                      class="btn btn-sm rounded-circle shadow-sm"
+                      style="
+                        width: 40px;
+                        height: 40px;
+                        background-color: #3b5998;
+                      "
+                    >
+                      <i class="fab fa-facebook-f text-white"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="btn btn-sm rounded-circle shadow-sm"
+                      style="
+                        width: 40px;
+                        height: 40px;
+                        background-color: #1da1f2;
+                      "
+                    >
+                      <i class="fab fa-twitter text-white"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="btn btn-sm rounded-circle shadow-sm"
+                      style="
+                        width: 40px;
+                        height: 40px;
+                        background-color: #0077b5;
+                      "
+                    >
+                      <i class="fab fa-linkedin-in text-white"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- profile section : fist version  -->
+            <!-- <div class="col-lg-3 mb-4">
+                        <div class="glass-card p-4 text-center">
+                            <img src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-female-user-profile-vector-illustration-isolated-background-women-profile-sign-business-concept_157943-38866.jpg?semt=ais_hybrid&w=740" 
+                            alt="Profile" class="profile-avatar mb-3">
+                            <h4 class="text-white mb-1">John Doe</h4>
+                            <p class="text-glass-muted mb-3">Premium Member</p>
+                            <p class="text-glass-muted mb-3">Phone: 01859385787</p>
+                            <p class="text-glass-muted mb-3">Email: ashraful@instasure.xyz</p>
+                            <p class="text-glass-muted mb-3">Address: Banani Dhaka</p>
+                           
+                            <button class="btn btn-edit-profile">
+                                <i class="fas fa-edit me-2"></i>Edit Profile
+                            </button>
+                            
+                            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+                            
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <h6 class="text-white mb-0">12</h6>
+                                    <small class="text-glass-muted">Policies</small>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class="text-white mb-0">3</h6>
+                                    <small class="text-glass-muted">Claims</small>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class="text-white mb-0">8</h6>
+                                    <small class="text-glass-muted">Active</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div> -->
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="row mt-4 mb-4">
+            <div class="col-12">
+              <div class="glass-card p-4">
+                <h5 class="text-white mb-3">Quick Actions</h5>
+                <div class="row">
+                  <div
+                    class="col-lg-2 col-md-3 col-sm-4 col-6 text-center mb-3"
+                  >
+                    <button class="quick-action-btn w-100 py-3">
+                      <i class="fas fa-plus d-block mb-2"></i>
+                      <small>New Policy</small>
+                    </button>
+                  </div>
+                  <div
+                    class="col-lg-2 col-md-3 col-sm-4 col-6 text-center mb-3"
+                  >
+                    <button class="quick-action-btn w-100 py-3">
+                      <i class="fas fa-clipboard-list d-block mb-2"></i>
+                      <small>File Claim</small>
+                    </button>
+                  </div>
+                  <div
+                    class="col-lg-2 col-md-3 col-sm-4 col-6 text-center mb-3"
+                  >
+                    <button class="quick-action-btn w-100 py-3">
+                      <i class="fas fa-credit-card d-block mb-2"></i>
+                      <small>Pay Premium</small>
+                    </button>
+                  </div>
+                  <div
+                    class="col-lg-2 col-md-3 col-sm-4 col-6 text-center mb-3"
+                  >
+                    <button class="quick-action-btn w-100 py-3">
+                      <i class="fas fa-download d-block mb-2"></i>
+                      <small>Documents</small>
+                    </button>
+                  </div>
+                  <div
+                    class="col-lg-2 col-md-3 col-sm-4 col-6 text-center mb-3"
+                  >
+                    <button class="quick-action-btn w-100 py-3">
+                      <i class="fas fa-headset d-block mb-2"></i>
+                      <small>Support</small>
+                    </button>
+                  </div>
+                  <div
+                    class="col-lg-2 col-md-3 col-sm-4 col-6 text-center mb-3"
+                  >
+                    <button class="quick-action-btn w-100 py-3">
+                      <i class="fas fa-video d-block mb-2"></i>
+                      <small>Telemedicine</small>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Sidebar toggle functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById("sidebar");
+        const mainContent = document.getElementById("mainContent");
+        const sidebarToggle = document.getElementById("sidebarToggle");
+        const toggleIcon = document.getElementById("toggleIcon");
+        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+        const mobileOverlay = document.getElementById("mobileOverlay");
+
+        // Desktop sidebar toggle
+        if (sidebarToggle) {
+          sidebarToggle.addEventListener("click", function () {
+            sidebar.classList.toggle("expanded");
+            mainContent.classList.toggle("expanded");
+
+            // Rotate toggle icon
+            if (sidebar.classList.contains("expanded")) {
+              toggleIcon.style.transform = "rotate(180deg)";
+            } else {
+              toggleIcon.style.transform = "rotate(0deg)";
+            }
+          });
+        }
+
+        // Mobile menu toggle
+        if (mobileMenuBtn) {
+          mobileMenuBtn.addEventListener("click", function () {
+            sidebar.classList.toggle("show");
+            mobileOverlay.classList.toggle("show");
+
+            // Change icon
+            const icon = mobileMenuBtn.querySelector("i");
+            if (sidebar.classList.contains("show")) {
+              icon.className = "fas fa-times";
+            } else {
+              icon.className = "fas fa-bars";
+            }
+          });
+        }
+
+        // Close sidebar when clicking overlay
+        if (mobileOverlay) {
+          mobileOverlay.addEventListener("click", function () {
+            sidebar.classList.remove("show");
+            mobileOverlay.classList.remove("show");
+
+            // Reset icon
+            const icon = mobileMenuBtn.querySelector("i");
+            icon.className = "fas fa-bars";
+          });
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener("click", function (e) {
+          if (window.innerWidth <= 768) {
+            if (
+              !sidebar.contains(e.target) &&
+              !mobileMenuBtn.contains(e.target) &&
+              !mobileOverlay.contains(e.target)
+            ) {
+              sidebar.classList.remove("show");
+              mobileOverlay.classList.remove("show");
+
+              // Reset icon
+              const icon = mobileMenuBtn.querySelector("i");
+              icon.className = "fas fa-bars";
+            }
+          }
+        });
+
+        // Handle window resize
+        window.addEventListener("resize", function () {
+          if (window.innerWidth > 768) {
+            sidebar.classList.remove("show");
+            mobileOverlay.classList.remove("show");
+
+            // Reset mobile menu icon
+            const icon = mobileMenuBtn.querySelector("i");
+            icon.className = "fas fa-bars";
+          }
+        });
+      });
+
+      // Dropdown toggle functionality
+      function toggleDropdown(event, dropdownId) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const sidebar = document.getElementById("sidebar");
+
+        // On mobile, sidebar is always expanded when visible
+        if (window.innerWidth > 768) {
+          // If sidebar is not expanded, expand it first (desktop only)
+          if (!sidebar.classList.contains("expanded")) {
+            sidebar.classList.add("expanded");
+            document.getElementById("mainContent").classList.add("expanded");
+            document.getElementById("toggleIcon").style.transform =
+              "rotate(180deg)";
+          }
+        }
+
+        const dropdown = document.getElementById(dropdownId);
+        const arrow = event.currentTarget.querySelector(".dropdown-arrow");
+
+        // Close all other dropdowns
+        document
+          .querySelectorAll(".dropdown-menu-custom")
+          .forEach(function (menu) {
+            if (menu.id !== dropdownId) {
+              menu.classList.remove("show");
+              const otherArrow = document.querySelector(
+                `[onclick*="${menu.id}"] .dropdown-arrow`
+              );
+              if (otherArrow) {
+                otherArrow.classList.remove("rotated");
+              }
+            }
+          });
+
+        // Toggle current dropdown
+        dropdown.classList.toggle("show");
+        if (arrow) {
+          arrow.classList.toggle("rotated");
+        }
+      }
+
+      // Close dropdowns when clicking outside
+      document.addEventListener("click", function (event) {
+        if (!event.target.closest(".sidebar-nav-item")) {
+          document
+            .querySelectorAll(".dropdown-menu-custom")
+            .forEach(function (menu) {
+              menu.classList.remove("show");
+            });
+          document
+            .querySelectorAll(".dropdown-arrow")
+            .forEach(function (arrow) {
+              arrow.classList.remove("rotated");
+            });
+        }
+      });
+    </script>
+  </body>
+</html>
